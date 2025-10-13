@@ -3,19 +3,21 @@ package com.company;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class Product extends Admin {
+public class Product extends Producer {
     Scanner input = new Scanner(System.in);
-    private String name;
-    private double price;
-    private double volume;
-    private String producer;
+    public String name;
+    public double price;
+    public double volume;
+    public String factory;
+    public int producer = -1;//will be set when created
+    public int for_customer = -1;//will be set when someone buy this
+    public String Category;
 
     public Product() {
         System.out.print("Production name: ");
-        this.name = input.nextLine();
-        Products.add(this.name);
-        System.out.print("Producer name: ");
-        this.producer = input.nextLine();
+        this.name = input.next();
+        System.out.print("Factory name: ");
+        this.factory = input.next();
         System.out.print("Production's price: ");
         this.price = input.nextDouble();
         System.out.print("Production's volume: ");
@@ -25,7 +27,7 @@ public class Product extends Admin {
 /*food stuff*/
 
 class FoodStuff extends Product {
-    private int ExpireDays;
+    public int ExpireDays;
 
     public FoodStuff() {
         System.out.print("Production's expire days: ");
@@ -34,24 +36,30 @@ class FoodStuff extends Product {
 }
 
 class FruitAndVegetables extends FoodStuff {
-    private String ProductionCity;
+    public String ProductionCity;
 
     public FruitAndVegetables() {
         System.out.print("Production city name: ");
         this.ProductionCity = input.next();
-
+        Category = "FruitsAndVegetables";
     }
 }
 
 class JunkFoods extends FoodStuff {
+    public JunkFoods(){
+        Category = "Junkfoods";
+    }
 }
 
 class Diary extends FoodStuff {
+    public Diary(){
+        Category = "Diary";
+    }
 }
 ////////////////////////////////////////////////
 /*clothes*/
 class Clothes extends Product {
-    private String Gender;
+    public String Gender;
     boolean genChoose = false;
 
     public Clothes() {
@@ -82,39 +90,42 @@ class Clothes extends Product {
     }
 }
 class Shoes extends Clothes{
-   private double Size;
-   private String Material;
+   public double Size;
+   public String Material;
    public Shoes(){
        System.out.print("Shoe's size: ");
        this.Size = input.nextDouble();
        System.out.print("Shoe's material: ");
-       this.Material = input.nextLine();
+       this.Material = input.next();
+       Category = "Shoes";
    }
 }
 class Shirt extends Clothes{
-    private String size;
-    private String Material;
+    public String size;
+    public String Material;
     public Shirt(){
         System.out.print("Shirt's size: ");
-        this.size = input.nextLine();
+        this.size = input.next();
         System.out.print("Shirt's material: ");
-        this.Material = input.nextLine();
+        this.Material = input.next();
+        Category = "Shirts";
     }
 }
 class Trousers extends Clothes{
-    private String size;
-    private String Material;
+    public String size;
+    public String Material;
     public Trousers(){
         System.out.print("Trousers's size: ");
-        this.size = input.nextLine();
+        this.size = input.next();
         System.out.print("Trousers's material: ");
-        this.Material = input.nextLine();
+        this.Material = input.next();
+        Category = "Trousers";
     }
 }
 //////////////////////////////
 /*Electronics*/
 class Electronics extends Product{
-    private int production_year;
+    public int production_year;
     public Electronics(){
         System.out.print("production year: ");
         this.production_year = input.nextInt();
@@ -125,6 +136,7 @@ class TV extends Electronics{
     public TV(){
         System.out.print("TV's display size: ");
         this.display_size = input.nextDouble();
+        Category = "Televisions";
     }
 }
 class Phone extends Electronics{
@@ -132,6 +144,7 @@ class Phone extends Electronics{
     public Phone(){
         System.out.print("Phone's display size: ");
         this.display_size = input.nextDouble();
+        Category = "Phones";
     }
 }
 class GameConsole extends Electronics{
@@ -146,5 +159,6 @@ class GameConsole extends Electronics{
             Accessory = input.next();
             Accessories.add(Accessory);
         }
+        Category = "GameConsoles";
     }
 }
